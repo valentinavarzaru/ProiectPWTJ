@@ -9,7 +9,7 @@ public class Angajat {
     private String numeAngajat;
     @NotNull(message = "Prenumele angajatului nu poate fi null!")
     private String prenumeAngajat;
-    @Min(5)
+    @Min(value = 5, message = "Taxa trebuie sa fie mai mare de 5 lei!")
     private Double taxaPerServiciu;
 
     public Angajat() {}

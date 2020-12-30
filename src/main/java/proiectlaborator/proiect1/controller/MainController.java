@@ -19,110 +19,160 @@ public class MainController {
 
     //    Clienti
     @GetMapping("/getClienti")
-    public List<Client> getClienti() {
-        return mainService.getClienti();
+    public ResponseEntity<List<Client>> getClienti() {
+        return ResponseEntity.status(HttpStatus.OK).body(mainService.getClienti());
     }
 
     @GetMapping("/getClientiByName")
-    public ResponseEntity<?> getClientByName(@RequestParam String name) {
-        return ResponseEntity.ok().body(mainService.getClientByName(name));
+    public ResponseEntity<Client> getClientByName(@RequestParam String name) {
+        return ResponseEntity.status(HttpStatus.FOUND).body(mainService.getClientByName(name));
     }
 
     @GetMapping("/getClientiById")
-    public ResponseEntity<?> getClientById(@RequestParam int id) {
-        return ResponseEntity.ok().body(mainService.getClientById(id));
+    public ResponseEntity<Client> getClientById(@RequestParam int id) {
+        return ResponseEntity.status(HttpStatus.FOUND).body(mainService.getClientById(id));
     }
 
     @PostMapping("/adaugaClient")
-    public List<Client> adaugaClient(@RequestBody @Valid Client c) {
-        return mainService.adaugaClient(c);
+    public ResponseEntity<List<Client>> adaugaClient(@RequestBody @Valid Client c) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(mainService.adaugaClient(c));
     }
 
     @PostMapping("/updateTelefon")
-    public List<Client> updateTelefon(@RequestParam @Valid int id, long nr) {
-        return mainService.updateTelefon(id, nr);
+    public ResponseEntity<List<Client>> updateTelefon(@RequestParam @Valid int id, long nr) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(mainService.updateTelefon(id, nr));
     }
 
     @DeleteMapping("/stergeClient")
-    public List<Client> stergeClient(@RequestParam int id) {
-        return mainService.stergeClient(id);
+    public ResponseEntity<List<Client>> stergeClient(@RequestParam int id) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(mainService.stergeClient(id));
     }
 
 //    Angajati
 
     @GetMapping("/getAngajati")
-    public List<Angajat> getAngajati() {
-        return mainService.getAngajati();
+    public ResponseEntity<List<Angajat>> getAngajati() {
+        return ResponseEntity.status(HttpStatus.OK).body(mainService.getAngajati());
     }
 
     @GetMapping("/getAngajatiByName")
-    public ResponseEntity<?> getAngajatByName(@RequestParam String name) {
-        return ResponseEntity.ok().body(mainService.getAngajatiByName(name));
+    public ResponseEntity<Angajat> getAngajatByName(@RequestParam String name) {
+        return ResponseEntity.status(HttpStatus.FOUND).body(mainService.getAngajatiByName(name));
+    }
+
+    @GetMapping("/getAngajatiById")
+    public ResponseEntity<Angajat> getAngajatiById(@RequestParam int idAngajat) {
+        return ResponseEntity.status(HttpStatus.FOUND).body(mainService.getAngajatiById(idAngajat));
     }
 
     @PostMapping("/adaugaAngajat")
-    public List<Angajat> adaugaAngajat(@RequestBody @Valid Angajat a) {
-        return mainService.adaugaAngajat(a);
+    public ResponseEntity<List<Angajat>> adaugaAngajat(@RequestBody @Valid Angajat a) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(mainService.adaugaAngajat(a));
+    }
+
+    @PostMapping("/updateTaxa")
+    public ResponseEntity<List<Angajat>> updateTaxa(@RequestParam @Valid int idAngajat, Double taxa) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(mainService.updateTaxa(idAngajat,taxa));
     }
 
     @DeleteMapping("/stergeAngajat")
-    public List<Angajat> stergeAngajat(@RequestParam int id) {
-        return mainService.stergeAngajat(id);
+    public ResponseEntity<List<Angajat>> stergeAngajat(@RequestParam int idAngajat) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(mainService.stergeAngajat(idAngajat));
     }
 
 //    Servicii Frizerie
 
     @GetMapping("/getServicii")
-    public List<ServiciuFrizerie> getServicii() {
-        return mainService.getServicii();
+    public ResponseEntity<List<ServiciuFrizerie>> getServicii() {
+        return ResponseEntity.status(HttpStatus.OK).body(mainService.getServicii());
     }
 
     @GetMapping("/getServiciuByName")
     public ResponseEntity<?> getServiciuByName(@RequestParam String name) {
-        return ResponseEntity.ok().body(mainService.getServiciuByName(name));
+        return ResponseEntity.status(HttpStatus.FOUND).body(mainService.getServiciuByName(name));
+    }
+
+    @GetMapping("/getServiciuById")
+    public ResponseEntity<ServiciuFrizerie> getServiciuById(int idServiciu) {
+        return ResponseEntity.status(HttpStatus.FOUND).body(mainService.getServiciuById(idServiciu));
     }
 
     @PostMapping("/adaugaServiciu")
-    public List<ServiciuFrizerie> adaugaServiciu(@RequestBody @Valid ServiciuFrizerie a) {
-        return mainService.adaugaServiciu(a);
+    public ResponseEntity<List<ServiciuFrizerie>> adaugaServiciu(@RequestBody @Valid ServiciuFrizerie a) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(mainService.adaugaServiciu(a));
+    }
+
+    @PostMapping("/updatePretServiciu")
+    public ResponseEntity<List<ServiciuFrizerie>> updatePretServiciu(int idServiciu, Double pret) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(mainService.updatePretServiciu(idServiciu, pret));
     }
 
     @DeleteMapping("/stergeServiciu")
-    public List<ServiciuFrizerie> stergeServiciu(@RequestParam int id) {
-        return mainService.stergeServiciu(id);
+    public ResponseEntity<List<ServiciuFrizerie>> stergeServiciu(@RequestParam int idServiciu) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(mainService.stergeServiciu(idServiciu));
     }
 
 //    Programari
 
     @GetMapping("/getProgramari")
-    public List<Programare> getProgramari() {
-        return mainService.getProgramari();
+    public ResponseEntity<List<Programare>> getProgramari() {
+        return ResponseEntity.status(HttpStatus.OK).body(mainService.getProgramari());
     }
 
     @GetMapping("/getProgramareById")
-    public ResponseEntity<?> getProgramareByName(@RequestParam int id) {
-        return ResponseEntity.ok().body(mainService.getProgramareById(id));
+    public ResponseEntity<Programare> getProgramareById(@RequestParam int idProg) {
+        return ResponseEntity.status(HttpStatus.FOUND).body(mainService.getProgramareById(idProg));
     }
 
     @PostMapping("/adaugaProgramare")
-    public List<Programare> adaugaProgramare(@RequestBody @Valid Programare p) {
-        return mainService.adaugaProgramare(p);
+    public ResponseEntity<List<Programare>> adaugaProgramare(@RequestBody @Valid Programare p, @RequestParam String metPlata) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(mainService.adaugaProgramare(p, metPlata));
+    }
+
+    @PostMapping("/updateDataProg")
+    public ResponseEntity<List<Programare>> updateDataProg(@RequestParam @Valid int idProg, String data) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(mainService.updateDataProg(idProg, data));
+    }
+
+    @PostMapping("/updateOraProg")
+    public ResponseEntity<List<Programare>> updateOraProg(@RequestParam @Valid int idProg, String ora) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(mainService.updateOraProg(idProg, ora));
     }
 
     @DeleteMapping("/stergeProgramare")
-    public List<Programare> stergeProgramare(@RequestParam int id) {
-        return mainService.stergeProgramare(id);
+    public ResponseEntity<List<Programare>> stergeProgramare(@RequestParam int idProg) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(mainService.stergeProgramare(idProg));
     }
 
     //    Plati
     @GetMapping("/getPlati")
-    public List<Plata> getPlati() {
-        return mainService.getPlati();
+    public ResponseEntity<List<Plata>> getPlati() {
+        return ResponseEntity.status(HttpStatus.OK).body(mainService.getPlati());
+    }
+
+    @GetMapping("/getPlataById")
+    public ResponseEntity<Plata> getPlataById(@RequestParam int idPlata) {
+        return ResponseEntity.status(HttpStatus.FOUND).body(mainService.getPlataById(idPlata));
+    }
+
+    @GetMapping("/getPlataByIdProg")
+    public ResponseEntity<?> getPlataByIdProg(@RequestParam int idProg) {
+        return ResponseEntity.status(HttpStatus.FOUND).body(mainService.getPlataByIdProg(idProg));
+    }
+
+    @GetMapping("/afisarePretFinal")
+    public ResponseEntity<?> afisarePretFinal(@RequestParam int idProgramare) {
+        return ResponseEntity.status(HttpStatus.FOUND).body(mainService.afisarePretFinal(idProgramare));
     }
 
     @PostMapping("/adaugaPlata")
-    public List<Plata> adaugaPlata(@RequestParam int idProgramare) {
-        return mainService.adaugaPlata(idProgramare);
+    public ResponseEntity<List<Plata>> adaugaPlata(@RequestParam int idProgramare, String metPlata) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(mainService.adaugaPlata(idProgramare, metPlata));
+    }
+
+    @DeleteMapping("/stergePlata")
+    public ResponseEntity<List<Plata>> stergePlata(@RequestParam int idPlata) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(mainService.stergePlata(idPlata));
     }
 
 }

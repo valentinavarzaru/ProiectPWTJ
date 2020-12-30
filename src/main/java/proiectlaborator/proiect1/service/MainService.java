@@ -1,10 +1,8 @@
 package proiectlaborator.proiect1.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Service;
 import proiectlaborator.proiect1.model.*;
-import proiectlaborator.proiect1.query.Querys;
 import proiectlaborator.proiect1.repository.*;
 import proiectlaborator.proiect1.utils.ObjectNotFoundException;
 
@@ -22,6 +20,7 @@ public class MainService {
     }
 
     public Client getClientByName(String name) {
+        clientRepository.getClienti();
         return clientRepository.getClientByName(name);
     }
 
@@ -57,8 +56,16 @@ public class MainService {
         return angajatRepository.getAngajatiByName(name);
     }
 
+    public Angajat getAngajatiById(int idAngajat) {
+        return angajatRepository.getAngajatiById(idAngajat);
+    }
+
     public List<Angajat> adaugaAngajat(Angajat a) {
         return angajatRepository.adaugaAngajat(a);
+    }
+
+    public List<Angajat> updateTaxa(int idAngajat, Double taxa) {
+        return angajatRepository.updateTaxa(idAngajat, taxa);
     }
 
     public List<Angajat> stergeAngajat(int idAngajat) {
@@ -71,6 +78,14 @@ public class MainService {
 
     public List<ServiciuFrizerie> getServicii() {
         return serviciuFrizerieRepository.getServicii();
+    }
+
+    public ServiciuFrizerie getServiciuById(int idServiciu) {
+        return serviciuFrizerieRepository.getServiciuById(idServiciu);
+    }
+
+    public List<ServiciuFrizerie> updatePretServiciu(int idServiciu, Double pret) {
+        return serviciuFrizerieRepository.updatePretServiciu(idServiciu, pret);
     }
 
     public ServiciuFrizerie getServiciuByName(String name) {
@@ -97,8 +112,16 @@ public class MainService {
         return programareRepository.getProgramareById(id);
     }
 
-    public List<Programare> adaugaProgramare(Programare p) {
-        return programareRepository.adaugaProgramare(p);
+    public List<Programare> adaugaProgramare(Programare p, String metPlata) {
+        return programareRepository.adaugaProgramare(p, metPlata);
+    }
+
+    public List<Programare> updateDataProg(int idProg, String data) {
+        return programareRepository.updateDataProg(idProg, data);
+    }
+
+    public List<Programare> updateOraProg(int idProg, String ora) {
+        return programareRepository.updateOraProg(idProg, ora);
     }
 
     public List<Programare> stergeProgramare(int idProgramare) {
@@ -113,7 +136,23 @@ public class MainService {
         return plataRepository.getPlati();
     }
 
-    public List<Plata> adaugaPlata(int idProgramare) {
-        return plataRepository.adaugaPlata(idProgramare);
+    public Plata getPlataById(int id) {
+        return plataRepository.getPlataById(id);
+    }
+
+    public List<Plata> getPlataByIdProg(int idProg) {
+        return plataRepository.getPlataByIdProg(idProg);
+    }
+
+    public Double afisarePretFinal(int idPlata) {
+        return plataRepository.afisarePretFinal(idPlata);
+    }
+
+    public List<Plata> adaugaPlata(int idProgramare, String metPlata) {
+        return plataRepository.adaugaPlata(idProgramare, metPlata);
+    }
+
+    public List<Plata> stergePlata(int idPlata) {
+        return plataRepository.stergePlata(idPlata);
     }
 }
