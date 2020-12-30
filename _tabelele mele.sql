@@ -7,13 +7,6 @@ CREATE TABLE `demo_proiect1`.`clienti` (
   PRIMARY KEY (`idClient`));
 
 
-CREATE TABLE `demo_proiect1`.`mylogger` (
-  `idLogger` INT NOT NULL AUTO_INCREMENT,
-  `data` DATE NULL,
-  `mesajLogger` VARCHAR(45) NULL,
-  PRIMARY KEY (`idLogger`));
-
-
 CREATE TABLE `demo_proiect1`.`angajati` (
   `idAngajat` INT NOT NULL AUTO_INCREMENT,
   `numeAngajat` VARCHAR(45) NULL,
