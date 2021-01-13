@@ -14,7 +14,8 @@ import proiectlaborator.proiect1.service.MainService;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class MainServiceTest {
@@ -30,7 +31,9 @@ public class MainServiceTest {
     public void getClientiTest() {
         //arrange
         when(clientRepository.getClienti()).thenReturn(
-                Arrays.asList(new Client(100,"Trandafir", "Alexandra", "feminin", 555444))
+                Arrays.asList(new Client(100,"Trandafir", "Alexandra", "feminin", 555444),
+                        new Client(101,"Ionescu", "Andrei", "masculin", 521461),
+                        new Client(102,"Pop", "Ana-Maria", "feminin", 298461))
         );
 
         //act
@@ -38,7 +41,7 @@ public class MainServiceTest {
 
         //assert
         Client c = result.get(0);
-        Assertions.assertEquals(result.size(), 1);
+        Assertions.assertEquals(result.size(), 3);
         Assertions.assertEquals(c.getIdClient(), 100);
         Assertions.assertEquals(c.getNumeClient(), "Trandafir");
     }
@@ -57,7 +60,22 @@ public class MainServiceTest {
 
         //assert
         Assertions.assertEquals(result.getNumeClient(), name);
+    }
 
+    @Test
+    @DisplayName("Get client by name from repo - name does not exist")
+    public void getClientByNameTestNameDoesNotExist() {
+        //arrange
+        String name = "Mureseanu";
+        when(clientRepository.getClientByName(name)).thenReturn(
+                new Client(100,"Mincu", "Alexandra", "feminin", 555444)
+        );
+
+        //act
+        Client result = mainService.getClientByName(name);
+
+        //assert
+        Assertions.assertNotEquals(result.getNumeClient(), name);
     }
 
     @Test
@@ -79,5 +97,19 @@ public class MainServiceTest {
         Assertions.assertEquals(client.get(0).getNrTelefon(), clientAdaugat.getNrTelefon());
     }
 
+    @Test
+    @DisplayName("Stergere clienti")
+    public void stergeClientTest() {
+        // arrange
+        Client client = new Client("Trandafir", "Alexandra", "feminin", 555444);
+        mainService.adaugaClient(client);
+        int dosId = mainService.getClienti().size() - 1;
+
+        //act
+        List<Client> result = mainService.stergeClient(dosId);
+
+        // assert
+        verify(clientRepository,times(1)).stergeClient(eq(dosId));
+    }
 
 }

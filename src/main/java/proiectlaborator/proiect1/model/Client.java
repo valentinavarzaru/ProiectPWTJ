@@ -16,6 +16,13 @@ public class Client {
 
     public Client() {}
 
+    public Client(@NotNull(message = "Numele clientului nu poate fi null!") String numeClient, @NotNull(message = "Prenumele clientului nu poate fi null!") String prenumeClient, String gen, @Range(min = 10, max = 10, message = "Numarul de telefon nu este valid!") long nrTelefon) {
+        this.numeClient = numeClient;
+        this.prenumeClient = prenumeClient;
+        this.gen = gen;
+        this.nrTelefon = nrTelefon;
+    }
+
     public Client(int idClient, @NotNull(message = "Numele clientului nu poate fi null!") String numeClient, @NotNull(message = "Prenumele clientului nu poate fi null!") String prenumeClient, String gen, @Range(min = 10, max = 10, message = "Numarul de telefon nu este valid!") long nrTelefon) {
         this.idClient = idClient;
         this.numeClient = numeClient;
